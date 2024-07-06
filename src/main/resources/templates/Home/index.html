@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>PreciousLV</title>
+    <th:block th:include="Layout :: link-css-logo"></th:block>
+</head>
+<body>
+    <th:block th:replace="Layout :: loading"></th:block>
+    <th:block th:replace="Layout :: header"></th:block>
+    <!-- begin coding -->
+    <div class="full_bg">
+        <div class="slider_main">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- carousel code -->
+                        <div id="carouselExampleIndicators" class="carousel slide">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <!-- first slide -->
+                                <div class="carousel-item active">
+                                    <div class="carousel-caption relative">
+                                        <div class="row d_flex">
+                                            <div  class="col-md-5">
+                                                <div class="board">
+                                                    <i><img src="images/top_icon.png" alt="#"/></i>
+                                                    <h3>
+                                                        NGUYEN<br> CONG<br> QUY
+                                                    </h3>
+                                                    <div class="link_btn">
+                                                        <a class="read_more" target="_blank" href="https://www.facebook.com/profile.php?id=100072603927239">Read More   <span></span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <div class="banner_img">
+                                                    <figure><img class="img_responsive" src="/images/"></figure>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- second slide -->
+                                <div class="carousel-item">
+                                    <div class="carousel-caption relative">
+                                        <div class="row d_flex">
+                                            <div  class="col-md-5">
+                                                <div class="board">
+                                                    <i><img src="images/top_icon.png" alt="#"/></i>
+                                                    <h3>
+                                                        NGUYEN<br> HONG<br> VI
+                                                    </h3>
+                                                    <div class="link_btn">
+                                                        <a class="read_more" target="_blank" href="https://www.facebook.com/nguyen.hongvi.395">Read More   <span></span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <div class="banner_img">
+                                                    <figure><img class="img_responsive" src="/images/"></figure>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- controls -->
+                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end coding -->
+    <th:block th:replace="Layout :: footer"></th:block>
+    <th:block th:replace="Layout :: script"></th:block>
+</body>
+</html>
