@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-   <html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
    <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +16,13 @@
    <div class="login">
          <img src="/css/assets/img/login-bg.png" alt="login image" class="login__img">
 
-         <form action="" class="login__form">
+         <form th:action="@{/login}" method="post" class="login__form">
+            <div th:if="${param.error}" class="alert alert-danger">
+               Invalid username and password.
+            </div>
+            <div th:if="${param.logout}" class="alert alert-success">
+               You have been logged out.
+            </div>
             <h1 class="login__title">Login</h1>
 
             <div class="login__content">
@@ -24,8 +30,8 @@
                   <i class="ri-user-3-line login__icon"></i>
 
                   <div class="login__box-input">
-                     <input type="email" required class="login__input" id="login-email" placeholder=" ">
-                     <label for="login-email" class="login__label">Email</label>
+                     <input type="text" required name="username" class="login__input" id="login-email" placeholder=" ">
+                     <label for="login-email" class="login__label">Username</label>
                   </div>
                </div>
 
@@ -33,7 +39,7 @@
                   <i class="ri-lock-2-line login__icon"></i>
 
                   <div class="login__box-input">
-                     <input type="password" required class="login__input" id="login-pass" placeholder=" ">
+                     <input type="password" required name="password" class="login__input" id="login-pass" placeholder=" ">
                      <label for="login-pass" class="login__label">Password</label>
                      <i class="ri-eye-off-line login__eye" id="login-eye"></i>
                   </div>
@@ -42,7 +48,7 @@
 
             <div class="login__check">
                <div class="login__check-group">
-                  <input type="checkbox" class="login__check-input" id="login-check">
+                  <input type="checkbox" name="remember-me" class="login__check-input" id="login-check">
                   <label for="login-check" class="login__check-label">Remember me</label>
                </div>
 
@@ -52,7 +58,7 @@
             <button type="submit" class="login__button">Login</button>
 
             <p class="login__register">
-               Don't have an account? <a href="#">Register</a>
+               Don't have an account? <a href="/register">Register</a>
             </p>
          </form>
       </div>
