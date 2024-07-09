@@ -29,6 +29,7 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Getter
     @Column(name = "firstname", length = 50)
     @Size(min = 1, max = 50, message = "Họ và tên đệm phải có ít nhất 1 kí tự và nhiều nhất 50 kí tự.")
     private String firstname;
@@ -71,6 +72,7 @@ public class User implements UserDetails {
     public String getUsername() {
         return username;
     }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
