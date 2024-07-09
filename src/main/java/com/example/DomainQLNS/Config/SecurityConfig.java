@@ -46,7 +46,7 @@ public class SecurityConfig{
                 .csrf().disable()
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login").anonymous() // Chỉ cho phép truy cập khi chưa đăng nhập
-                        .requestMatchers("/css/**", "/js/**", "/oauth/**", "/error", "/images/**")
+                        .requestMatchers("/css/**", "/js/**", "/oauth/**", "/error", "/images/**","/login/register")
                         .permitAll() // Cho phép truy cập không cần xác thực.
 //                        .requestMatchers("/products/edit/**", "/products/add", "/products/delete","/cart/check-quantities","/categories/**")
 //                        .hasAnyAuthority("ADMIN") // Chỉ cho phép ADMIN truy cập.
@@ -57,7 +57,7 @@ public class SecurityConfig{
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/") // Trang chuyển hướng sau khi đăng xuất.
-                        .deleteCookies("JSESSIONID", "remember-me") // Xóa cookie.
+                        .deleteCookies("JSESSIONID") // Xóa cookie.
                         .invalidateHttpSession(true) // Hủy phiên làm việc.
                         .clearAuthentication(true) // Xóa xác thực.
                         .permitAll()

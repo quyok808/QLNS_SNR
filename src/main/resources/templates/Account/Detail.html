@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Account Detail</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <th:block th:include="Layout :: link-css-logo"></th:block>
+    <style>
+        .card-right p{
+            margin-bottom: 30px;
+            text-align: left;
+            padding-left: 20px;
+        }
+        .user-info-container {
+            display: flex;
+            align-items: center; /* Center vertically */
+            justify-content: space-between; /* Distribute space between children */
+            width: 100%; /* Ensure it takes the full width of the parent */
+        }
+
+        .user-info-container h3 {
+            flex-grow: 1; /* Allow the h3 to grow and take available space */
+            text-align: center; /* Center text within h3 */
+            margin: 0; /* Remove default margin */
+        }
+
+        .user-info-container a {
+            margin-left: auto; /* Push the icon to the far right */
+        }
+
+        .card-right {
+            position: relative;
+        }
+
+        .edit-mode {
+            display: none;
+        }
+
+        .card-right.editing .view-mode {
+            display: none;
+        }
+
+        .card-right.editing .edit-mode {
+            display: block;
+        }
+
+        .edit-mode input {
+            width: calc(100% - 10px);
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .edit-mode button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .edit-mode button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<th:block th:replace="Layout :: loading"></th:block>
+<div class="header">
+    <div class="container-fluid">
+        <div class="row d_flex">
+            <div class=" col-md-2 col-sm-3 col logo_section">
+                <div class="full">
+                    <div class="center-desk">
+                        <div class="logo">
+                            <a href="/"><img src="/css/layout/images/logo.png" alt="#" /></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 col-sm-12">
+                <nav class="navigation navbar navbar-expand-md navbar-dark ">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarsExample04">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/nhansu">Nhân sự</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/chamcong">Công</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/lichlam">Lịch làm</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/contact">Contact Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="col-md-2">
+                <ul class="email text_align_right">
+                    <li class="d_none"><a href="/account"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+                    <li class="d_none"> <a href="/logout"><i class="fa fa-sign-out" style="cursor: pointer;" aria-hidden="true"></i></a> </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <div class="user-info-container">
+                        <h3 style="font-weight: bold; text-transform: uppercase; font-size: 24px;">User Information</h3>
+                        <a href="#"><i class="fa fa-pencil edit-icon" onclick="toggleEditMode()" style="cursor: pointer;" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                <div class="card-body" style="display: flex;">
+                    <div class="card-left">
+                        <img src="/images/hong_vi_banner.jpg" width="200px" height="300px" style="object-fit: cover; text-align: center;">
+                    </div>
+                    <div class="card-right">
+                        <div class="view-mode">
+                            <p>Username: <span th:text="${username}"></span></p>
+                            <p>Họ và tên: <span id="view-firstname" th:text="${firstname}"></span> <span id="view-lastname"  th:text="${lastname}"></span></p>
+                            <p>Số điện thoại: <span id="view-phone" th:text="${phone}"></span></p>
+                            <p>Authorities: <span th:each="authority : ${authorities}" th:text="${authority.authority}"></span></p>
+                        </div>
+                        <div class="edit-mode">
+                            <form id="edit-form">
+                                <p>Username: <input type="text" id="username" th:value="${username}"></p>
+                                <p>Họ và tên đệm: <input type="text" id="firstname" th:value="${firstname}"> <br>Tên: <input type="text" id="lastname" th:value="${lastname}"></p>
+                                <p>Số điện thoại: <input type="text" id="phone" th:value="${phone}"></p>
+                                <button type="submit">Save</button>
+                                <button onclick="cancel(event)">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    function toggleEditMode() {
+        const cardRight = document.querySelector('.card-right');
+        cardRight.classList.toggle('editing');
+    }
+
+    function cancel(event){
+        event.preventDefault();
+        toggleEditMode();
+    }
+
+    document.getElementById('edit-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const username = document.getElementById('username').value;
+            const firstname = document.getElementById('firstname').value;
+            const lastname = document.getElementById('lastname').value;
+            const phone = document.getElementById('phone').value;
+
+            fetch('/updateUserInfo', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, firstname, lastname, phone }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+
+                    window.location.href = '/account';
+                } else {
+                    alert('Error updating user information');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+</script>
+<th:block th:replace="Layout :: footer"></th:block>
+<th:block th:replace="Layout :: script"></th:block>
+</body>
+</html>

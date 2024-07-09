@@ -60,5 +60,19 @@ public class UserService implements UserDetailsService {
             UsernameNotFoundException {
         return userRepository.findByUsername(username);
     }
+
+    public boolean updateUserInfo(User request) {
+        try {
+            Optional<User> user = userRepository.findByUsername(request.getUsername());
+            user.get().setFirstname(request.getFirstname());
+            user.get().setLastname(request.getLastname());
+            user.get().setPhone(request.getPhone());
+            userRepository.save(user.get());
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
 

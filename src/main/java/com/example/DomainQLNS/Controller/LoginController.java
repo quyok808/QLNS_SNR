@@ -12,12 +12,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 
 @Controller
-@RequestMapping("/login")
 @RequiredArgsConstructor
 public class LoginController {
     private final UserService userService;
 
-    @GetMapping
+    @GetMapping("/login")
     public String login() {
         return "Login/index";
     }
@@ -28,7 +27,7 @@ public class LoginController {
     }
     @PostMapping("/register")
     public String register(@Valid @ModelAttribute("user") User user, // Validate đối tượng User
-                           @NotNull BindingResult bindingResult, // Kết quả của quátrình validate
+                           @NotNull BindingResult bindingResult, // Kết quả của quá trình validate
                            Model model) {
         if (bindingResult.hasErrors()) { // Kiểm tra nếu có lỗi validate
             var errors = bindingResult.getAllErrors()
